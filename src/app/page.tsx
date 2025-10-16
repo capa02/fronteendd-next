@@ -1,103 +1,73 @@
 import Image from "next/image";
+import Link from "next/link";
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+// Data placeholder untuk 8 gambar
+// CATATAN: Anda HARUS menempatkan file gambar di folder '/public/images/' proyek Next.js Anda
+const images = [
+    { src: 'foto2.png', alt: 'Karyawan 1', id: 1 },
+    { src: 'foto1.png', alt: 'Karyawan 2', id: 2 },
+    { src: 'foto3.png', alt: 'Karyawan 3', id: 3 },
+    { src: 'foto4.png', alt: 'Karyawan 4', id: 4 },
+    { src: 'foto5.png', alt: 'Karyawan 5', id: 5 },
+    { src: 'foto6.png', alt: 'Karyawan 6', id: 6 },
+    { src: 'foto7.png', alt: 'Karyawan 7', id: 7 },
+    { src: 'foto8.png', alt: 'Karyawan 8', id: 8 },
+];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+export default function AboutParagon() {
+    return (
+        // 1. Container Utama: Full screen (h-screen), posisi relatif untuk menampung elemen absolut
+        <div className="relative w-screen h-screen overflow-hidden">
+
+            {/* 2. Grid Latar Belakang (8 Gambar) */}
+            <div className="grid grid-cols-4 grid-rows-2 w-full h-full">
+                {images.map((img, index) => (
+                    // Setiap kotak grid
+                    <div key={img.id} className="relative w-full h-full">
+                        <Image
+                            src={img.src}
+                            alt={img.alt}
+                            fill // Properti 'fill' Next.js agar gambar mengisi penuh div parent
+                            sizes="(max-width: 768px) 50vw, 25vw"
+                            style={{ objectFit: 'cover' }}
+                            priority={index < 4} // Prioritas untuk gambar yang terlihat di awal
+                        />
+                        {/* Overlay untuk menggelapkan gambar agar teks putih terbaca */}
+                        <div className="absolute inset-0 bg-black opacity-30 transition duration-300 hover:opacity-10"></div>
+                    </div>
+                ))}
+            </div>
+
+            {/* 3. Navbar/Header (Posisikan di atas semua) */}
+            <header className="absolute top-0 left-0 right-0 p-6 z-20 flex justify-between items-center text-white">
+
+                {/* Logo dan Teks */}
+                <div className="text-xl font-bold flex items-center gap-2 drop-shadow-lg">
+                    <span className="text-3xl">P</span>ARAGON CORP
+                </div>
+
+                {/* Navigasi Tautan */}
+                <nav className="flex gap-6 text-sm font-medium">
+                    <Link href="/about" className="hover:underline">About Us</Link>
+                    <Link href="/brands" className="hover:underline">Brands</Link>
+                    <Link href="/innovation" className="hover:underline">Innovation</Link>
+                    <Link href="/career" className="hover:underline">Career</Link>
+                    <Link href="/news" className="hover:underline">News</Link>
+                    <span className="ml-4 cursor-pointer">🔍</span>
+                </nav>
+            </header>
+
+            {/* 4. Konten Utama Teks (Overlay) */}
+            <div className="absolute inset-0 flex flex-col justify-center items-center text-white p-4 z-10">
+                <div className="max-w-4xl text-center">
+                    <h1 className="text-6xl sm:text-7xl font-extrabold mb-6 drop-shadow-xl">
+                        About Paragon
+                    </h1>
+                    <p className="text-xl sm:text-2xl leading-relaxed font-medium drop-shadow-lg">
+                        Paragon is an Indonesia beauty company with the purpose of creating a greater good for the society through innovation.
+                    </p>
+                </div>
+            </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+    );
 }
