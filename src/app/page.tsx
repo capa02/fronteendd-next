@@ -4,10 +4,10 @@ import Link from "next/link";
 const images = [
   { src: "/image/foto2.png", alt: "Karyawan 1", id: 1 },
   { src: "/image/foto1.png", alt: "Karyawan 2", id: 2 },
-  { src: "/image/foto3.png", alt: "Karyawan 3", id: 3 },
-  { src: "/image/foto4.png", alt: "Karyawan 4", id: 4 },
-  { src: "/image/foto5.png", alt: "Karyawan 5", id: 5 },
-  { src: "/image/foto6.png", alt: "Karyawan 6", id: 6 },
+  { src: "/image/foto3.jpg", alt: "Karyawan 3", id: 3 },
+  { src: "/image/foto4.jpg", alt: "Karyawan 4", id: 4 },
+  { src: "/image/foto5.jpg", alt: "Karyawan 5", id: 5 },
+  { src: "/image/foto6.jpg", alt: "Karyawan 6", id: 6 },
   { src: "/image/foto7.png", alt: "Karyawan 7", id: 7 },
   { src: "/image/foto8.png", alt: "Karyawan 8", id: 8 },
 ];
